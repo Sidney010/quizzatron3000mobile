@@ -13,15 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
-fun ButtonComecar(
+fun ButtonJogar(
     modifier: Modifier = Modifier,
     altura: Dp,
     largura:Dp,
     conteudoTexto: String,
     sizeConteudo: TextUnit,
-    color: Color
+    color: Color,
+    navController: NavController
 ) {
     Button(
         modifier = Modifier
@@ -30,7 +32,7 @@ fun ButtonComecar(
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
             ),
-        onClick = {},
+        onClick = { navController.navigate("questionario")},
         shape = RoundedCornerShape(altura),
         border = BorderStroke(width = 1.dp, color = Color.Black)
 
