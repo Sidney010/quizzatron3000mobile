@@ -29,6 +29,51 @@ object BancoDeQuestoes {
                 AlternativaModel("São Paulo"),
                 AlternativaModel("Salvador")
             )
+        ),
+        QuestaoModel(
+            enunciado = "Qual o maior planeta do sistema solar?",
+            alternativas = listOf(
+                AlternativaModel("Marte"),
+                AlternativaModel("Saturno"),
+                AlternativaModel("Júpiter", true),
+                AlternativaModel("Netuno")
+            )
+        ),
+        QuestaoModel(
+            enunciado = "Quem pintou a 'Mona Lisa'?",
+            alternativas = listOf(
+                AlternativaModel("Vincent van Gogh"),
+                AlternativaModel("Leonardo da Vinci", true),
+                AlternativaModel("Pablo Picasso"),
+                AlternativaModel("Salvador Dalí")
+            )
+        ),
+        QuestaoModel(
+            enunciado = "Em que ano o homem pisou na Lua pela primeira vez?",
+            alternativas = listOf(
+                AlternativaModel("1962"),
+                AlternativaModel("1969", true),
+                AlternativaModel("1972"),
+                AlternativaModel("1958")
+            )
+        ),
+        QuestaoModel(
+            enunciado = "Qual é o metal cujo símbolo químico é Au?",
+            alternativas = listOf(
+                AlternativaModel("Prata"),
+                AlternativaModel("Alumínio"),
+                AlternativaModel("Ouro", true),
+                AlternativaModel("Cobre")
+            )
+        ),
+        QuestaoModel(
+            enunciado = "Qual oceano banha a costa leste do Brasil?",
+            alternativas = listOf(
+                AlternativaModel("Oceano Pacífico"),
+                AlternativaModel("Oceano Índico"),
+                AlternativaModel("Oceano Ártico"),
+                AlternativaModel("Oceano Atlântico", true)
+            )
         )
     )
 }

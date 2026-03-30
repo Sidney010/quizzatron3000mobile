@@ -23,12 +23,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun AltertivaResposta(
-    modifier: Modifier = Modifier,
     alternativaTexto: String = "",
-    pontuacaoFalsaOuVerdadeira: Boolean = false,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    corFundo: Color = Color.White,
 
 ) {
+
     Card(
         modifier = Modifier
             .padding(16.dp,0.dp)
@@ -43,7 +43,7 @@ fun AltertivaResposta(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(255, 255, 255, 255)),
+                .background(color = corFundo),
             contentAlignment = Alignment.Center
         ){
 
@@ -54,7 +54,7 @@ fun AltertivaResposta(
             ) {
                 OutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { onClick
+                    onClick = { onClick()
                     },
                     border = null,
                 ) {

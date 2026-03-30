@@ -32,10 +32,15 @@ fun QuestionarioScreen(
     ) {
         ImagemQuizzLogo(modifier = Modifier, sizeImage = 50.dp)
         ConteinerTitulo(
-            numeroPergunta = 1,
-            numeroTotalPergunta = 2
+            numeroPergunta = viewModel.indiceAtual.intValue + 1,
+            numeroTotalPergunta = viewModel.listaQuestoes.size
         )
-        Questao()
+        Questao(
+            viewModel = viewModel,
+            onFinalizado = { pontos ->
+                navController.navigate("resultado/$pontos")
+            }
+        )
     }
 
 

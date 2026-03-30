@@ -26,13 +26,10 @@ import com.aulasandroid.quizzatron3000.screens.QuestionarioScreenViewModel
 @Composable
 fun Questao(
     modifier: Modifier = Modifier,
-    indiceQuestao: Int = 0,
-    viewModel: QuestionarioScreenViewModel = viewModel()
+    viewModel: QuestionarioScreenViewModel = viewModel(),
+    onFinalizado: (Int) -> Unit // Callback para navegação
 ) {
-    val questoes = BancoDeQuestoes.lista
-
-
-    val questao = questoes[indiceQuestao]
+    val questao = viewModel.questaoAtual
 
     Card(
         modifier = modifier
@@ -69,11 +66,24 @@ fun Questao(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
 
-                    questao.alternativas.forEach { alternativa ->
+                    questao.alternativas.forEachIndexed { index, alternativa ->
+                        val corCard = when {
+                            !viewModel.respondido.value -> Color.White
+                            alternativa.correta -> Color(0xFF81C784) // Verde suave (acerto)
+                            viewModel.alternativaSelecionadaIndex.value == index -> Color(0xFFE57373) // Vermelho (erro)
+                            else -> Color.White
+                        }
+
                         AltertivaResposta(
                             alternativaTexto = alternativa.texto,
-                            pontuacaoFalsaOuVerdadeira = alternativa.correta,
-                            onClick = {   viewModel.proximaPergunta()}
+                            corFundo = corCard,
+                            onClick = {
+                                if (!viewModel.respondido.value) {
+                                    viewModel.conferirResposta(index)
+                                } else {
+                                    viewModel.proximaPergunta(onFinalizado)
+                                }
+                            }
                         )
                     }
 

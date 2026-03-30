@@ -17,13 +17,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.aulasandroid.quizzatron3000.bancoDeQuestoes.BancoDeQuestoes
 
 import com.aulasandroid.quizzatron3000.components.ButtonJogar
 import com.aulasandroid.quizzatron3000.components.ConteinerTitulo
 import com.aulasandroid.quizzatron3000.components.ImagemQuizzLogo
 
 @Composable
-fun ResultadoScreen(modifier: Modifier = Modifier, navController: NavController) {
+fun ResultadoScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    totalAcertos: Int
+    ) {
+    val totalPerguntas = BancoDeQuestoes.lista.size
     Column(
         modifier = Modifier
             .background(Color(255, 255, 255, 0))
@@ -44,7 +50,7 @@ fun ResultadoScreen(modifier: Modifier = Modifier, navController: NavController)
         ) {
             ConteinerTitulo(conteudoTitulo = "Bom Trabalho!")
             Text(
-                text = "Você acertou 1 de 3 perguntas",
+                text = "Você acertou $totalAcertos de $totalPerguntas perguntas",
                 textAlign = TextAlign.Center,
                 fontSize = 24.sp
             )

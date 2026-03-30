@@ -20,62 +20,77 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aulasandroid.quizzatron3000.screens.HomeScreen
+import com.aulasandroid.quizzatron3000.screens.LoginScreen
 import com.aulasandroid.quizzatron3000.screens.QuestionarioScreen
 import com.aulasandroid.quizzatron3000.screens.ResultadoScreen
 import com.aulasandroid.quizzatron3000.ui.theme.Quizzatron3000Theme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             Quizzatron3000Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val navController = rememberNavController()
 
-                    NavHost(
-                        navController = navController,
-                        startDestination = "home",
-                        exitTransition =  {
-                            slideOutOfContainer(
-                                towards = AnimatedContentTransitionScope
-                                    .SlideDirection.Left,
-                                animationSpec = tween(1000)
-                            )
-                        },
-                        enterTransition = {
-                            slideIntoContainer(
-                                towards = AnimatedContentTransitionScope
-                                    .SlideDirection.Left,
-                                animationSpec = tween(1000)
-                            )
-                        }
-                    ) {
-                        composable(
-                            route = "home",
-                            exitTransition = {
-                                slideOutOfContainer(
-                                    towards = AnimatedContentTransitionScope
-                                        .SlideDirection.Left,
-                                    animationSpec = tween(1000)
-                                ) + fadeOut( animationSpec = tween(1000))
-                            }
-                        ) {
-                            HomeScreen(navController = navController)
-                        }
-                        composable(
-                            route = "questionario",
-                            exitTransition = {
-                                slideOutOfContainer(
-                                    towards = AnimatedContentTransitionScope
-                                        .SlideDirection.Left,
-                                    animationSpec = tween(1000)
-                                ) + fadeOut( animationSpec = tween(1000))
-                            }
-                        ) {
-                            QuestionarioScreen(navController = navController)
-                        }
-                    }
+                    LoginScreen()
+
+//                    val navController = rememberNavController()
+//
+//                    NavHost(
+//                        navController = navController,
+//                        startDestination = "home",
+//                        exitTransition =  {
+//                            slideOutOfContainer(
+//                                towards = AnimatedContentTransitionScope
+//                                    .SlideDirection.Left,
+//                                animationSpec = tween(1000)
+//                            )
+//                        },
+//                        enterTransition = {
+//                            slideIntoContainer(
+//                                towards = AnimatedContentTransitionScope
+//                                    .SlideDirection.Left,
+//                                animationSpec = tween(1000)
+//                            )
+//                        },
+//
+//                    ) {
+//                        composable(
+//                            route = "home",
+//                            exitTransition = {
+//                                slideOutOfContainer(
+//                                    towards = AnimatedContentTransitionScope
+//                                        .SlideDirection.Left,
+//                                    animationSpec = tween(1000)
+//                                ) + fadeOut( animationSpec = tween(1000))
+//                            }
+//                        ) {
+//                            HomeScreen(navController = navController)
+//                        }
+//                        composable(
+//                            route = "questionario",
+//                            exitTransition = {
+//                                slideOutOfContainer(
+//                                    towards = AnimatedContentTransitionScope
+//                                        .SlideDirection.Left,
+//                                    animationSpec = tween(1000)
+//                                ) + fadeOut( animationSpec = tween(1000))
+//                            }
+//                        ) {
+//                            QuestionarioScreen(navController = navController)
+//                        }
+//                        composable(
+//                            route = "resultado/{pontos}",
+//                            arguments = listOf(navArgument("pontos") { type = NavType.IntType })
+//                        ) { backStackEntry ->
+//                            val pontos = backStackEntry.arguments?.getInt("pontos") ?: 0
+//                            ResultadoScreen(navController = navController, totalAcertos = pontos)
+//                        }
+//                    }
+
+
                     // HomeScreen()
                     // QuestionarioScreen()
                     // ResultadoScreen()
