@@ -19,7 +19,7 @@ import com.aulasandroid.quizzatron3000.components.ButtonJogar
 import com.aulasandroid.quizzatron3000.components.ImagemQuizzLogo
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, nome:String = "") {
     Box(
         modifier = Modifier
             .background(Color(0, 188, 212, 255))
@@ -35,6 +35,10 @@ fun HomeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(40.dp))
             Text(
                 text = "QUIZATRON 3000",
+                fontSize = 30.sp
+            )
+            Text(
+                text = "Bem vindo $nome !",
                 fontSize = 30.sp
             )
             ButtonJogar(

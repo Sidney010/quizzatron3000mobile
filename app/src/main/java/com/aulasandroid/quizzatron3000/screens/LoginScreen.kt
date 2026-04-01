@@ -4,6 +4,7 @@ import android.R.attr.contentDescription
 import android.R.attr.onClick
 import android.R.attr.text
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,20 +34,29 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.aulasandroid.quizzatron3000.R
 import com.aulasandroid.quizzatron3000.components.CaixaDeEntrada
 import com.aulasandroid.quizzatron3000.components.ImagemQuizzLogo
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(
+    loginScreenViewModel: LoginScreenViewModel,
+    navController: NavController
+) {
     Column(
         modifier = Modifier
+            .background(Color(246, 246, 246, 255))
             .padding(32.dp,32.dp,32.dp,50.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
+        val nome by loginScreenViewModel.nome.observeAsState( initial = "" )
+        val senha by loginScreenViewModel.senha.observeAsState( initial = "" )
+
         Column(
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,22 +75,34 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 placeholder = "Qual é o seu nome?",
                 keyboardType = KeyboardType.Email,
                 modifier = Modifier.fillMaxWidth(),
-                value = "",
+                value = nome,
                 corTema = Color(255,255,255),
                 atualizarValor = {
+                    loginScreenViewModel.onNomeChange(it)
                 }
             )
-
+            CaixaDeEntrada(
+                label = "Senha",
+                placeholder = "Qual é a sua senha ?",
+                keyboardType = KeyboardType.Password,
+                modifier = Modifier.fillMaxWidth(),
+                value = senha,
+                corTema = Color(255,255,255),
+                atualizarValor = {
+                    loginScreenViewModel.onSenhaChange(it)
+                }
+            )
+            Spacer(modifier = Modifier.height(120.dp))
             Image(
-                modifier = Modifier.height(200.dp),
-                painter = painterResource(R.drawable.outline_energy_program_saving_24),
+                modifier = Modifier.height(150.dp),
+                painter = painterResource(R.drawable.quiz),
                 contentDescription = "Image",
             )
-
+            Spacer(modifier = Modifier.height(150.dp))
             Button(
                 modifier = Modifier.padding(80.dp,12.dp).fillMaxWidth().height(40.dp),
                 onClick = {
-                    /*TODO*/
+                    navController.navigate("home/$nome")
                 }
             ) {
                 Text(
@@ -86,6 +110,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     text = "ENTRAR"
                 )
             }
+
         }
 
         Row(
